@@ -3,6 +3,7 @@ import random
 from flask import jsonify, request
 from PIL import Image
 from io import BytesIO
+import time
 app = Flask(__name__)
 
 
@@ -13,6 +14,7 @@ def infer():
         if image:
             im = Image.open(BytesIO(image.read()))
             print(im.width, im.height)
+            time.sleep(1)
             output = {'success': True,'result': bool(random.getrandbits(1)), "shape": {'width': im.width,
                                                                                         'height': im.height}}
             return jsonify(output)
